@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Visit</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ visit.id }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{% if visit.date %}{{ visit.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Patient</th>
+                <td>{{ visit.patient }}</td>
+            </tr>
+            <tr>
+                <th>Medical</th>
+                <td>{{ visit.medical }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('visit_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('visit_edit', { 'id': visit.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

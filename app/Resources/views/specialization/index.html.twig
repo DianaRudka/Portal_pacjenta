@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Specializations list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for specialization in specializations %}
+            <tr>
+                <td><a href="{{ path('spec_show', { 'id': specialization.id }) }}">{{ specialization.id }}</a></td>
+                <td>{{ specialization.type }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('spec_show', { 'id': specialization.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('spec_edit', { 'id': specialization.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('spec_new') }}">Create a new specialization</a>
+        </li>
+    </ul>
+{% endblock %}

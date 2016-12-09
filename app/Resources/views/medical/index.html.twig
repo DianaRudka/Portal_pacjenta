@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Medicals list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>PWZ</th>
+                <th>Email</th>
+                <th>Username</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for medical in medicals %}
+            <tr>
+                <td><a href="{{ path('medical_show', { 'id': medical.id }) }}">{{ medical.id }}</a></td>
+                <td>{{ medical.name }}</td>
+                <td>{{ medical.surname }}</td>
+                <td>{{ medical.pwz }}</td>
+                <td>{{ medical.email }}</td>
+                <td>{{ medical.username }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('medical_show', { 'id': medical.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('medical_edit', { 'id': medical.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('medical_new') }}">Create a new medical</a>
+        </li>
+    </ul>
+{% endblock %}

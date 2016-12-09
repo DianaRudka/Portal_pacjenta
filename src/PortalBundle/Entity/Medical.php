@@ -1,0 +1,316 @@
+<?php
+
+namespace PortalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Medical
+ *
+ * @ORM\Table(name="medical")
+ * @ORM\Entity(repositoryClass="PortalBundle\Repository\MedicalRepository")
+ */
+class Medical
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="surname", type="string", length=255)
+     */
+    private $surname;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="pwz", type="integer")
+     */
+    private $pwz;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="username", type="string", length=255)
+     */
+    private $username;
+
+	/**
+	 * @ORM\OneToMany(targetEntity="Visit", mappedBy="medical")
+	 */
+	private $visits;
+
+	/**
+	 * @ORM\ManyToOne(targetEntity="Specialization", inversedBy="medical")
+	 */
+	private $specialization;
+
+	/**
+	 * @ORM\ManyToOne(targetEntity="Title", inversedBy="medical")
+	 */
+	private $title;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Medical
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set surname
+     *
+     * @param string $surname
+     * @return Medical
+     */
+    public function setSurname($surname)
+    {
+        $this->surname = $surname;
+
+        return $this;
+    }
+
+    /**
+     * Get surname
+     *
+     * @return string 
+     */
+    public function getSurname()
+    {
+        return $this->surname;
+    }
+
+    /**
+     * Set pwz
+     *
+     * @param integer $pwz
+     * @return Medical
+     */
+    public function setPwz($pwz)
+    {
+        $this->pwz = $pwz;
+
+        return $this;
+    }
+
+    /**
+     * Get pwz
+     *
+     * @return integer 
+     */
+    public function getPwz()
+    {
+        return $this->pwz;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return Medical
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set username
+     *
+     * @param string $username
+     * @return Medical
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * Get username
+     *
+     * @return string 
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->visits = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add visits
+     *
+     * @param \PortalBundle\Entity\Visit $visits
+     * @return Medical
+     */
+    public function addVisit(\PortalBundle\Entity\Visit $visits)
+    {
+        $this->visits[] = $visits;
+
+        return $this;
+    }
+
+    /**
+     * Remove visits
+     *
+     * @param \PortalBundle\Entity\Visit $visits
+     */
+    public function removeVisit(\PortalBundle\Entity\Visit $visits)
+    {
+        $this->visits->removeElement($visits);
+    }
+
+    /**
+     * Get visits
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getVisits()
+    {
+        return $this->visits;
+    }
+
+    /**
+     * Add specialization
+     *
+     * @param \PortalBundle\Entity\Specialization $specialization
+     * @return Medical
+     */
+    public function addSpecialization(\PortalBundle\Entity\Specialization $specialization)
+    {
+        $this->specialization[] = $specialization;
+
+        return $this;
+    }
+
+    /**
+     * Remove specialization
+     *
+     * @param \PortalBundle\Entity\Specialization $specialization
+     */
+    public function removeSpecialization(\PortalBundle\Entity\Specialization $specialization)
+    {
+        $this->specialization->removeElement($specialization);
+    }
+
+    /**
+     * Get specialization
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSpecialization()
+    {
+        return $this->specialization;
+    }
+
+    /**
+     * Set title
+     *
+     * @param \PortalBundle\Entity\Title $title
+     * @return Medical
+     */
+    public function setTitle(\PortalBundle\Entity\Title $title = null)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return \PortalBundle\Entity\Title 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set specialization
+     *
+     * @param \PortalBundle\Entity\Specialization $specialization
+     * @return Medical
+     */
+    public function setSpecialization(\PortalBundle\Entity\Specialization $specialization = null)
+    {
+        $this->specialization = $specialization;
+
+        return $this;
+    }
+
+//    /**
+//	 *
+//	 */
+//    static public function retFullNameWithTitle() {
+//		$fullName = '';
+//		$fullName .= $this->title;
+//
+//	}
+}
